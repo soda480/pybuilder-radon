@@ -2,6 +2,7 @@
 import re
 from pybuilder.core import init
 from pybuilder.core import task
+from pybuilder.core import depends
 from pybuilder.errors import BuildFailedException
 from pybuilder.pluginhelper.external_command import ExternalCommandBuilder
 from pybuilder.utils import assert_can_execute
@@ -17,6 +18,7 @@ def init_complexity(project):
 
 
 @task('complexity', description='checks cyclomatic complexity')
+@depends('prepare')
 def complexity(project, logger):
     """ checks cyclomatic complexity
     """
