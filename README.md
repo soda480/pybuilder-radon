@@ -5,7 +5,12 @@
 
 # pybuilder-radon #
 
-A pybuilder plugin that computes the cyclomatic complexity of your project using `radon`. For more information about `radon` see the [radon home page](https://pypi.org/project/radon/). 
+A pybuilder plugin that computes the cyclomatic complexity of your project using `radon`. For more information refer to the [radon home page](https://pypi.org/project/radon/). Integration into pybuilder is done with:
+```python
+use_plugin('pypi:pybuilder_radon', '~=0.1.0')
+```
+
+## cyclomatic complexity ##
 
 Cyclomatic complexity is a software metric used to indicate the complexity of a program. It is a quantitative measure of the number of linearly independent paths through a program's source code. Cyclomatic complexity can be used to measure the code complexity. The higher the complexity, the more complex the code which typically means the code is more difficult to test and maintain. The number of the Cyclomatic complexity depends on how many different execution paths or control flow of your code can execute depending on various inputs. Refer to [cyclomatic complexity](https://www.c-sharpcorner.com/article/code-metrics-cyclomatic-complexity/) for more information. The metrics for Cyclomatic Complexity are:
 
