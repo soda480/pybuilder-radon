@@ -18,7 +18,7 @@ name = 'pybuilder-radon'
 authors = [Author('Emilio Reyes', 'soda480@gmail.com')]
 summary = 'Pybuilder plugin for radon'
 url = 'https://github.com/soda480/pybuilder-radon'
-version = '0.1.0'
+version = '0.1.1'
 default_task = ['clean', 'analyze']
 license = 'Apache License, Version 2.0'
 description = summary
@@ -51,5 +51,5 @@ def set_properties(project):
         'Programming Language :: Python :: 3.6',
         'Topic :: Software Development :: Build Tools'])
     # only for functional testing plugin
-    # project.set_property('radon_break_build_average_complexity_threshold', 3.5)
+    # project.set_property('radon_break_build_average_complexity_threshold', 3.2)
     # project.set_property('radon_break_build_complexity_threshold', 6)
