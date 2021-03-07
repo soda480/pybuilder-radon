@@ -51,5 +51,5 @@ def set_properties(project):
         'Programming Language :: Python :: 3.6',
         'Topic :: Software Development :: Build Tools'])
     # only for functional testing plugin
-    # project.set_property('radon_break_build_average_complexity_threshold', 3.1)
-    # project.set_property('radon_break_build_complexity_threshold', 4)
+    # project.set_property('radon_break_build_average_complexity_threshold', 3.5)
+    # project.set_property('radon_break_build_complexity_threshold', 6)

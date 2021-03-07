@@ -54,9 +54,9 @@ def verify_result(result, logger, command):
 
 
 def get_complexity(project, result, logger):
-    """ return average complexity and log contents of result
+    """ return complexity info and if verbose log contents of result
     """
-    complexity = {
+    complexity_data = {
         'average': None,
         'highest': {
             'name': None,
@@ -73,18 +73,18 @@ def get_complexity(project, result, logger):
         match = re.match(regex_line, line)
         if match:
             score = float(match.group('score'))
-            if score > complexity['highest']['score']:
-                complexity['highest']['score'] = score
-                complexity['highest']['name'] = match.group('name')
+            if score > complexity_data['highest']['score']:
+                complexity_data['highest']['score'] = score
+                complexity_data['highest']['name'] = match.group('name')
 
     average_complexity = result.report_lines[-1].strip()
     logger.info(average_complexity)
     regex_average = r'Average complexity: [A-Z] \((?P<average>.*)\)'
     match = re.match(regex_average, average_complexity)
     if match:
-        complexity['average'] = float(match.group('average'))
+        complexity_data['average'] = float(match.group('average'))
 
-    return complexity
+    return complexity_data
 
 
 def verify_complexity(complexity_data):
