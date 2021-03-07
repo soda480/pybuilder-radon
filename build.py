@@ -39,6 +39,17 @@ def set_properties(project):
     project.set_property('distutils_readme_description', True)
     project.set_property('distutils_description_overwrite', True)
     project.set_property('distutils_upload_skip_existing', True)
+    project.set_property('distutils_classifiers', [
+        'Development Status :: 4 - Beta',
+        'Environment :: Other Environment',
+        'Environment :: Plugins',
+        'Intended Audience :: Developers',
+        'Intended Audience :: System Administrators',
+        'License :: OSI Approved :: Apache Software License',
+        'Operating System :: POSIX :: Linux',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3.6',
+        'Topic :: Software Development :: Build Tools'])
     # only for functional testing plugin
     # project.set_property('radon_break_build_average_complexity_threshold', 3.1)
     # project.set_property('radon_break_build_complexity_threshold', 4)
