@@ -25,10 +25,10 @@ def complexity(project, logger):
     result = command.run_on_production_source_files(logger)
     if not verify_result(result, logger, command):
         return
-    complexity = get_complexity(project, result, logger)
-    if not verify_complexity(complexity):
+    complexity_data = get_complexity(project, result, logger)
+    if not verify_complexity(complexity_data):
         return
-    process_complexity(project, complexity)
+    process_complexity(project, complexity_data)
 
 
 def get_command(project):
@@ -87,28 +87,28 @@ def get_complexity(project, result, logger):
     return complexity
 
 
-def verify_complexity(complexity):
+def verify_complexity(complexity_data):
     """ return True if complexity structure is valid, False otherwise
     """
-    if complexity['average'] is None:
+    if complexity_data['average'] is None:
         return False
-    if complexity['highest']['name'] is None:
+    if complexity_data['highest']['name'] is None:
         return False
     return True
 
 
-def process_complexity(project, complexity):
+def process_complexity(project, complexity_data):
     """ process complexity
     """
     average_complexity_threshold = project.get_property('radon_break_build_average_complexity_threshold')
     if average_complexity_threshold:
-        average = complexity['average']
+        average = complexity_data['average']
         if float(average) > average_complexity_threshold:
             raise BuildFailedException(f'average complexity {average} is greater than {average_complexity_threshold}')
 
     complexity_threshold = project.get_property('radon_break_build_complexity_threshold')
     if complexity_threshold:
-        highest_score = complexity['highest']['score']
+        highest_score = complexity_data['highest']['score']
         if float(highest_score) > complexity_threshold:
-            name = complexity['highest']['name']
+            name = complexity_data['highest']['name']
             raise BuildFailedException(f'{name} complexity {highest_score} is greater than {complexity_threshold}')

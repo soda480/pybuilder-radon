@@ -1,14 +1,17 @@
 [![GitHub Workflow Status](https://github.com/soda480/pybuilder-radon/workflows/build/badge.svg)](https://github.com/soda480/pybuilder-radon/actions)
-[![Code Coverage](https://codecov.io/gh/soda480/pybuilder-radon/branch/master/graph/badge.svg)](https://codecov.io/gh/soda480/pybuilder-radon)
-[![Code Grade](https://www.code-inspector.com/project/12270/status/svg)](https://frontend.code-inspector.com/project/12270/dashboard)
+[![Code Coverage](https://codecov.io/gh/soda480/pybuilder-radon/branch/main/graph/badge.svg)](https://codecov.io/gh/soda480/pybuilder-radon)
+[![Code Grade](https://www.code-inspector.com/project/19887/status/svg)](https://frontend.code-inspector.com/project/19887/dashboard)
 [![PyPI version](https://badge.fury.io/py/pybuilder-radon.svg)](https://badge.fury.io/py/pybuilder-radon)
 
 # pybuilder-radon #
 
-A pybuilder plugin that computes the cyclomatic complexity of your project using `radon`. For more information refer to the [radon home page](https://pypi.org/project/radon/). Integration into pybuilder is done with:
+A pybuilder plugin that computes the cyclomatic complexity of your project using `radon`. For more information refer to the [radon home page](https://pypi.org/project/radon/). To add this plugin into your pybuilder project:
 ```python
 use_plugin('pypi:pybuilder_radon', '~=0.1.0')
 ```
+
+*NOTE* This version of the plugin only works with version `v0.11.x` of Pybuilder.
+
 
 ## cyclomatic complexity ##
 
@@ -19,7 +22,8 @@ Score | Complexity | Risk Type
 1 to 10 | simple | not much risk
 11 to 20 | complex | low risk
 21 to 50 | too complex | medium risk, attention
-> 50 | very complex | unable to test, high risk
+more than 50 | very complex | unable to test, high risk
+
 
 The pybuilder task `complexity` will use radon to to analyze your project and display the overall average cyclomatic complexity, verbose mode will display complexity of all classes, functions and methods analyzed. A few pybuilder properties can be set to fail the build if a complexity threshold has been exceeded.
 
