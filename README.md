@@ -9,7 +9,7 @@ A pybuilder plugin that checks the cyclomatic complexity of your project using `
 
 To add this plugin into your pybuilder project, add the following line near the top of your build.py:
 ```python
-use_plugin('pypi:pybuilder_radon', '~=0.1.0')
+use_plugin('pypi:pybuilder_radon', '~=0.1.2')
 ```
 
 **NOTE** version `v0.1.x` of this plugin will only work with version `v0.11.x` of Pybuilder.
