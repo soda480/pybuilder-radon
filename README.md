@@ -5,9 +5,9 @@
 
 # pybuilder-radon #
 
-A pybuilder plugin that checks the cyclomatic complexity of your project using `radon`. For more information about radon refer to the [radon home page](https://pypi.org/project/radon/).
+A pybuilder plugin that checks the cyclomatic complexity of your project using `radon`. For more information about radon refer to the [radon pypi page](https://pypi.org/project/radon/).
 
-To add this plugin into your pybuilder project, add the following line at the top of your build.py:
+To add this plugin into your pybuilder project, add the following line near the top of your build.py:
 ```python
 use_plugin('pypi:pybuilder_radon', '~=0.1.0')
 ```
@@ -29,7 +29,7 @@ Refer to [cyclomatic complexity](https://www.c-sharpcorner.com/article/code-metr
 
 ### Pybuilder radon properties ###
 
-The pybuilder task `pyb complexity` will use radon to to analyze your project and display the overall average cyclomatic complexity, verbose mode will display complexity of all classes, functions and methods analyzed. The following plugin properties can be set to fail the build if a complexity threshold has been exceeded.
+The pybuilder task `pyb radon` will use radon to to analyze your project and display the average cyclomatic complexity, verbose mode will display complexity of all classes, functions and methods analyzed. The following plugin properties are available to further configure the plugin's execution.
 
 Name | Type | Default Value | Description
 -- | -- | -- | --

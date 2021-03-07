@@ -9,20 +9,22 @@ from pybuilder.utils import assert_can_execute
 
 
 @init
-def init_complexity(project):
-    """ initialize complexity task properties
+def init_radon(project):
+    """ initialize radon task properties
     """
     project.set_property_if_unset('radon_break_build_average_complexity_threshold', None)
     project.set_property_if_unset('radon_break_build_complexity_threshold', None)
     project.plugin_depends_on('radon')
 
 
-@task('complexity', description='checks cyclomatic complexity')
+@task('radon', description='execute radon cyclomatic complexity')
 @depends('prepare')
-def complexity(project, logger):
-    """ checks cyclomatic complexity
+def radon(project, logger):
+    """ execute radon cyclomatic complexity
     """
+    set_verbose_property(project)
     command = get_command(project)
+    logger.info(f'Executing radon cyclomatic complexity: \"{command.as_string}\"')
     # assert_can_execute(command.parts, prerequisite='radon', caller='complexity')
     result = command.run_on_production_source_files(logger)
     if not verify_result(result, logger, command):
@@ -43,14 +45,21 @@ def get_command(project):
     return command
 
 
+def set_verbose_property(project):
+    """ set verbose property
+    """
+    verbose = project.get_property('verbose')
+    project.set_property('radon_verbose_output', verbose)
+
+
 def verify_result(result, logger, command):
     """ return True if result contains lines, False otherwise
     """
     if not result.report_lines:
-        logger.warn(f"Command {command.as_string()} produced no output")
+        logger.warn(f"Command {command.as_string} produced no output")
         return False
     if len(result.error_report_lines) > 0:
-        logger.error(f"Command {command.as_string()} produced errors, see {result.error_report_file}")
+        logger.error(f"Command {command.as_string} produced errors, see {result.error_report_file}")
         return False
     return True
 
@@ -68,10 +77,6 @@ def get_complexity(project, result, logger):
     regex_line = r'[A-Z] \d+:\d+ (?P<name>.*) - [A-Z] \((?P<score>\d+)\)'
     for line in result.report_lines[:-1]:
         line = line.strip()
-        # using this place to conform to pybuilder verbosity
-        verbose = project.get_property('verbose')
-        if verbose:
-            logger.debug(line)
         match = re.match(regex_line, line)
         if match:
             score = float(match.group('score'))
