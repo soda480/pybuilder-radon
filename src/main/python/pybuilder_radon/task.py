@@ -19,14 +19,14 @@ def init_radon(project):
 
 @task('radon', description='execute radon cyclomatic complexity')
 @depends('prepare')
-def radon(project, logger):
+def radon(project, logger, reactor):
     """ execute radon cyclomatic complexity
     """
     set_verbose_property(project)
-    command = get_command(project)
+    command = get_command(project, reactor)
     logger.info(f'Executing radon cyclomatic complexity: \"{command.as_string}\"')
     # assert_can_execute(command.parts, prerequisite='radon', caller='complexity')
-    result = command.run_on_production_source_files(logger)
+    result = command.run_on_production_source_files(logger, include_dirs_only=True)
     if not verify_result(result, logger, command):
         return
     complexity_data = get_complexity(project, result, logger)
@@ -35,10 +35,10 @@ def radon(project, logger):
     process_complexity(project, complexity_data)
 
 
-def get_command(project):
+def get_command(project, reactor):
     """ return radon command
     """
-    command = ExternalCommandBuilder('radon', project)
+    command = ExternalCommandBuilder('radon', project, reactor)
     command.use_argument('cc')
     command.use_argument('-a')
     command.use_argument('-s')

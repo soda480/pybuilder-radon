@@ -40,7 +40,7 @@ class TestTask(unittest.TestCase):
     def test__radon_Should_CallExpected_When_VerifyResultFalse(self, verify_result_patch, process_complexity_patch, *patches):
         verify_result_patch.return_value = False
         project_mock = Mock()
-        radon(project_mock, Mock())
+        radon(project_mock, Mock(), Mock())
         process_complexity_patch.assert_not_called()
 
     @patch('pybuilder_radon.task.get_command')
@@ -50,7 +50,7 @@ class TestTask(unittest.TestCase):
     def test__radon_Should_CallExpected_When_VerifyResultTrue(self, verify_result_patch, get_complexity_patch, process_complexity_patch, *patches):
         verify_result_patch.return_value = True
         project_mock = Mock()
-        radon(project_mock, Mock())
+        radon(project_mock, Mock(), Mock())
         process_complexity_patch.assert_called_once_with(project_mock, get_complexity_patch.return_value)
 
     @patch('pybuilder_radon.task.get_command')
@@ -62,14 +62,15 @@ class TestTask(unittest.TestCase):
         verify_result_patch.return_value = True
         verify_complexity_patch.return_value = False
         project_mock = Mock()
-        radon(project_mock, Mock())
+        radon(project_mock, Mock(), Mock())
         process_complexity_patch.assert_not_called()
 
     @patch('pybuilder_radon.task.ExternalCommandBuilder')
     def test__get_command_Should_CallAndReturnExpected_When_Called(self, external_command_builder_patch, *patches):
         project_mock = Mock()
-        result = get_command(project_mock)
-        external_command_builder_patch.assert_called_once_with('radon', project_mock)
+        reactor_mock = Mock()
+        result = get_command(project_mock, reactor_mock)
+        external_command_builder_patch.assert_called_once_with('radon', project_mock, reactor_mock)
         self.assertEqual(result, external_command_builder_patch.return_value)
 
     def test__set_verbose_property_Should_CallExpected_When_Called(self, *patches):

@@ -6,6 +6,9 @@ on:
   pull_request:
     branches:
       - master
+env:
+  CRYPTOGRAPHY_DONT_BUILD_RUST: 1
+
 jobs:
   build:
     runs-on: ubuntu-16.04
@@ -14,8 +17,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Install required packages
+      run: apk --update --no-cache add gcc libc-dev libffi-dev openssl-dev
+
     - name: Install pybuilder
-      run: pip install pybuilder==0.11.17
+      run: pip install pybuilder
 
     - name: Install dependencies
       run: pyb install_dependencies
