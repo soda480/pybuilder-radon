@@ -24,7 +24,6 @@ def radon(project, logger, reactor):
     """
     set_verbose_property(project)
     command = get_command(project, reactor)
-    logger.info(f'Executing radon cyclomatic complexity: \"{command.as_string}\"')
     # assert_can_execute(command.parts, prerequisite='radon', caller='complexity')
     result = command.run_on_production_source_files(logger, include_dirs_only=True)
     if not verify_result(result, logger, command):
