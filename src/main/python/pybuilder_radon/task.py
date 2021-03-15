@@ -15,6 +15,7 @@ def init_radon(project):
     project.set_property_if_unset('radon_break_build_average_complexity_threshold', None)
     project.set_property_if_unset('radon_break_build_complexity_threshold', None)
     project.plugin_depends_on('radon')
+    project.plugin_depends_on('flake8_polyfill')
 
 
 @task('radon', description='execute radon cyclomatic complexity')
