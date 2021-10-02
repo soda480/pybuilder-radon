@@ -1,9 +1,9 @@
+# pybuilder-radon #
 [![GitHub Workflow Status](https://github.com/soda480/pybuilder-radon/workflows/build/badge.svg)](https://github.com/soda480/pybuilder-radon/actions)
 [![Code Coverage](https://codecov.io/gh/soda480/pybuilder-radon/branch/main/graph/badge.svg)](https://codecov.io/gh/soda480/pybuilder-radon)
 [![Code Grade](https://www.code-inspector.com/project/19887/status/svg)](https://frontend.code-inspector.com/project/19887/dashboard)
 [![PyPI version](https://badge.fury.io/py/pybuilder-radon.svg)](https://badge.fury.io/py/pybuilder-radon)
-
-# pybuilder-radon #
+[![python](https://img.shields.io/badge/python-3.9-teal)](https://www.python.org/downloads/)
 
 A pybuilder plugin that checks the cyclomatic complexity of your project using `radon`. For more information about radon refer to the [radon pypi page](https://pypi.org/project/radon/).
 
@@ -62,9 +62,9 @@ Run the Docker container:
 docker container run \
 --rm \
 -it \
--v $PWD:/pybuilder-radon \
+-v $PWD:/code \
 pybradon:latest \
-/bin/sh
+/bin/bash
 ```
 
 Execute the build:
