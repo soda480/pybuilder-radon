@@ -8,6 +8,7 @@ from pybuilder.core import Author
 
 use_plugin('python.core')
 use_plugin('python.unittest')
+use_plugin('python.install_dependencies')
 use_plugin('python.flake8')
 use_plugin('python.coverage')
 use_plugin('python.distutils')
@@ -17,8 +18,11 @@ name = 'pybuilder-radon'
 authors = [Author('Emilio Reyes', 'soda480@gmail.com')]
 summary = 'Pybuilder plugin for radon cyclomatic complexity'
 url = 'https://github.com/soda480/pybuilder-radon'
-version = '0.2.3'
-default_task = ['clean', 'publish']
+version = '0.3.0'
+default_task = [
+    'clean',
+    'publish'
+]
 license = 'Apache License, Version 2.0'
 description = summary
 
@@ -48,6 +52,9 @@ def set_properties(project):
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Topic :: Software Development :: Build Tools'])
     # only for functional testing plugin
     # project.set_property('radon_break_build_average_complexity_threshold', 2.74)
