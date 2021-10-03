@@ -5,7 +5,7 @@ on:
       - '**'
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -17,9 +17,6 @@ jobs:
 
     - name: Install pybuilder
       run: pip install pybuilder
-
-    - name: Install dependencies
-      run: pyb install_dependencies
 
     - name: Execute build
       run: pyb
