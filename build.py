@@ -60,7 +60,6 @@ def set_properties(project):
         'Programming Language :: Python :: 3.10',
         'Topic :: Software Development :: Build Tools'])
     project.set_property('anybadge_exclude', 'vulnerabilities, coverage')
-    project.set_property('anybadge_use_shields', True)
     # only for functional testing plugin
     # project.set_property('radon_break_build_average_complexity_threshold', 2.74)
     # project.set_property('radon_break_build_complexity_threshold', 4)

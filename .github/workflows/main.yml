@@ -17,21 +17,36 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - name: build images
+      - name: build pybradon ${{ matrix.version }} image
         run:
           docker image build --build-arg PYTHON_VERSION=${{ matrix.version }} -t pybradon:${{ matrix.version }} .
+      - name: save pybradon ${{ matrix.version }} image
+        if: ${{ matrix.version == '3.9' }}
+        run: |
+          mkdir -p images
+          docker save --output images/pybradon-${{ matrix.version }}.tar pybradon:${{ matrix.version }}
+      - name: upload pybradon ${{ matrix.version }} image artifact
+        if: ${{ matrix.version == '3.9' }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: image
+          path: images/pybradon-${{ matrix.version }}.tar
   coverage:
     name: Publish Code Coverage Report
     needs: build-images
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-      - name: build image
+      - name: download image artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: image
+          path: images/
+      - name: load image
         run:
-          docker image build -t pybradon:latest .
+          docker load --input images/pybradon-3.9.tar
       - name: prepare report
         run: |
-          ID=$(docker create pybradon)
+          ID=$(docker create pybradon:3.9)
           docker cp $ID:/code/target/reports/pybuilder-radon_coverage.xml pybradon_coverage.xml
           sed -i -e 's,filename="pybradon/,filename="src/main/python/pybradon/,g' pybradon_coverage.xml
       - name: upload report
