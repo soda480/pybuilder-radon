@@ -18,7 +18,7 @@ name = 'pybuilder-radon'
 authors = [Author('Emilio Reyes', 'soda480@gmail.com')]
 summary = 'Pybuilder plugin for radon cyclomatic complexity'
 url = 'https://github.com/soda480/pybuilder-radon'
-version = '0.3.1'
+version = '0.3.2'
 default_task = [
     'clean',
     'analyze',
