@@ -1,34 +1,41 @@
 name: build
 on:
+  schedule:
+  - cron: "0 8 * * *"
   push:
     branches:
       - '**'
   pull_request:
     branches:
       - main
-
 jobs:
-  build:
+  build-images:
+    strategy:
+      matrix:
+        version: ['3.7', '3.8', '3.9', '3.10']
+    name: Build Python Docker images
     runs-on: ubuntu-20.04
-    container: python:3.9-slim
-
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Install pybuilder
-      run: pip install pybuilder
-
-    - name: Execute build
-      run: pyb
-
-    - name: Install Codecov requirements
-      run: |
-        apt-get update
-        apt-get install -y bash curl
-        sed -e 's,filename="pybuilder-radon/,filename="src/main/python/pybuilder_radon/,g' target/reports/pybuilder-radon_coverage.xml > coverage.xml
-
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: coverage.xml
+      - uses: actions/checkout@v3
+      - name: build images
+        run:
+          docker image build --build-arg PYTHON_VERSION=${{ matrix.version }} -t pybradon:${{ matrix.version }} .
+  coverage:
+    name: Publish Code Coverage Report
+    needs: build-images
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: build image
+        run:
+          docker image build -t pybradon:latest .
+      - name: prepare report
+        run: |
+          ID=$(docker create pybradon)
+          docker cp $ID:/code/target/reports/pybuilder-radon_coverage.xml pybradon_coverage.xml
+          sed -i -e 's,filename="pybradon/,filename="src/main/python/pybradon/,g' pybradon_coverage.xml
+      - name: upload report
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: pybradon_coverage.xml

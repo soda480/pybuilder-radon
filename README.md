@@ -1,9 +1,9 @@
-# pybuilder-radon #
+# pybuilder-radon
 [![GitHub Workflow Status](https://github.com/soda480/pybuilder-radon/workflows/build/badge.svg)](https://github.com/soda480/pybuilder-radon/actions)
 [![Code Coverage](https://codecov.io/gh/soda480/pybuilder-radon/branch/main/graph/badge.svg)](https://codecov.io/gh/soda480/pybuilder-radon)
 [![Code Grade](https://api.codiga.io/project/19887/status/svg)](https://app.codiga.io/public/project/19887/pybuilder-radon/dashboard)
 [![PyPI version](https://badge.fury.io/py/pybuilder-radon.svg)](https://badge.fury.io/py/pybuilder-radon)
-[![python](https://img.shields.io/badge/python-3.9-teal)](https://www.python.org/downloads/)
+[![python](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10-teal)](https://www.python.org/downloads/)
 
 A pybuilder plugin that checks the cyclomatic complexity of your project using `radon`. For more information about radon refer to the [radon pypi page](https://pypi.org/project/radon/).
 
@@ -17,7 +17,7 @@ use_plugin('pypi:pybuilder_radon')
 use_plugin('pypi:pybuilder_radon', '~=0.1.2')
 ```
 
-### cyclomatic complexity ###
+### cyclomatic complexity
 
 Cyclomatic complexity is a software metric used to indicate the complexity of a program. It is a quantitative measure of the number of linearly independent paths through a program's source code. Cyclomatic complexity can be used to measure code complexity. The higher the complexity score the more complex the code, which typically translates to the code being more difficult to understand, maintain and to test. The number of the Cyclomatic complexity depends on how many different execution paths or control flow of your code can execute depending on various inputs. The metrics for Cyclomatic Complexity are:
 
@@ -30,7 +30,7 @@ more than 50 | very complex | unable to test, high risk
 
 Refer to [cyclomatic complexity](https://www.c-sharpcorner.com/article/code-metrics-cyclomatic-complexity/) for more information.
 
-### Pybuilder radon properties ###
+### Pybuilder radon properties
 
 The pybuilder task `pyb radon` will use radon to to analyze your project and display the average cyclomatic complexity, verbose mode will display complexity of all classes, functions and methods analyzed. The following plugin properties are available to further configure the plugin's execution.
 
@@ -46,7 +46,7 @@ project.set_property('radon_break_build_average_complexity_threshold', 4)
 project.set_property('radon_break_build_complexity_threshold', 10)
 ```
 
-### Development ###
+### Development
 
 Clone the repository and ensure the latest version of Docker is installed on your development server.
 
@@ -64,7 +64,7 @@ docker container run \
 -it \
 -v $PWD:/code \
 pybradon:latest \
-/bin/bash
+bash
 ```
 
 Execute the build:
