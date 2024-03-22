@@ -1,7 +1,7 @@
 # pybuilder-radon
 [![GitHub Workflow Status](https://github.com/soda480/pybuilder-radon/workflows/build/badge.svg)](https://github.com/soda480/pybuilder-radon/actions)
-[![Code Coverage](https://codecov.io/gh/soda480/pybuilder-radon/branch/main/graph/badge.svg)](https://codecov.io/gh/soda480/pybuilder-radon)
-[![Code Grade](https://api.codiga.io/project/19887/status/svg)](https://app.codiga.io/public/project/19887/pybuilder-radon/dashboard)
+[![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://pybuilder.io/)
+[![vulnerabilities](https://img.shields.io/badge/vulnerabilities-None-brightgreen)](https://pypi.org/project/bandit/)
 [![PyPI version](https://badge.fury.io/py/pybuilder-radon.svg)](https://badge.fury.io/py/pybuilder-radon)
 [![python](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10-teal)](https://www.python.org/downloads/)
 
@@ -53,8 +53,7 @@ Clone the repository and ensure the latest version of Docker is installed on you
 Build the Docker image:
 ```sh
 docker image build \
--t \
-pybradon:latest .
+-t pybradon:latest .
 ```
 
 Run the Docker container:
